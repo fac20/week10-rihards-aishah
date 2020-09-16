@@ -24,7 +24,7 @@ export const StartForm = () => {
         <form>
             <fieldset>
                 <legend>PLAYERS</legend>
-                <input type="text" id="player1" placeholder="Player 1" />
+                <input type="text" id="player1" placeholder="Player 1*" required />
                 <input type="text" id="player2" placeholder="Player 2" />
                 <input type="text" id="player3" placeholder="Player 3" />
                 <input type="text" id="player4" placeholder="Player 4" />

@@ -2,6 +2,42 @@ import React from "react";
 import getData from "../utils/data.js";
 import { StartForm } from "./LandingPage.js"
 
+let playersArray = [];
+
+for (let i=0; i<4; i++){
+    const speed = {
+        0: 1,
+        1: 2,
+        2: 5,
+        3: 8
+    }
+    
+    const object = {
+        username: "",
+        name: "",
+        image: "",
+        torch: false,
+        location: "sand",
+        speed: ""
+    }
+    
+    object.speed = speed[i];
+    
+    playersArray.push(object)
+}
+
+console.log(playersArray);
+
+//takes an input of an array of player objects
+const getPlayerObject = (array) => {
+    array.foreach(player => {
+        getData(player.username).then(data => {
+            player.name = data.name;
+            player.image = data.avatar_url
+        })
+    })
+}
+
 const Avatar = (props) => {
     // const [avatar, setAvatar] = React.useState(null);
     // const [playerName, setPlayerName] = React.useState(null);
@@ -21,28 +57,12 @@ const Avatar = (props) => {
 //avatar returns player object? - wouldnt we want to save that?
 
 
-playerObject.map {
+// playerObject.map {
     
-}
-
-location.sand
-location.bridge
-
-try
-location.
+// }
 
 
-sand div
-playersobject.filter(player=> if player.location = sand ).map(playr => <)
-
-
-
-bridge
-playersobject.map(playr => <)
-
-
-grass
-playersobject.map(playr => <)
+// playersobject.filter(player=> if player.location = sand ).map(playr => <)
 
 //choosing which players to move on/off the bridge
 const movePlayer = (playerObj) => {
@@ -62,20 +82,4 @@ const movePlayer = (playerObj) => {
     }
 }
 
-
-
-const playerone = getPlayerObject("aissshah", 1)
-<div onClick=()=>{if (player?.location === sand) player?.location = bridge}><img></img></div>
-
-const getPlayerObject = (username, userspeed) => {
-    return getData(username).then(data => {
-        return {
-            avatar: data.avatar_url,
-            name: data.name,
-            location: "sand",
-            lastlocation: "sand",
-            speed: userspeed,
-        }
-    });
-
-}
+export {playersArray, getPlayerObject}

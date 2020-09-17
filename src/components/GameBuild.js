@@ -25,7 +25,7 @@ const Timer = (props) => {
         </div>
     )
 }
-
+//need to change this
 const movePlayer = (playerObj) => {
     switch (playerObj.location) {
         case "sand":
@@ -71,35 +71,8 @@ const Avatar = (props) => {
   
 }
 
-const Game = () => {
-    const [playerOne, setPlayerOne] = React.useState({username: "",
-    name: "",
-    image: "",
-    torch: false,
-    location: "sand",
-    speed: 1})
-
-    const [playerTwo, setPlayerTwo] = React.useState({username: "",
-    name: "",
-    image: "",
-    torch: false,
-    location: "sand",
-    speed: 2})
-
-    const [playerThree, setPlayerThree] = React.useState({username: "",
-    name: "",
-    image: "",
-    torch: false,
-    location: "sand",
-    speed: 5})
-
-    const [playerFour, setPlayerFour] = React.useState({username: "",
-    name: "",
-    image: "",
-    torch: false,
-    location: "sand",
-    speed: 8})
-
+const Game = (props) => {
+    console.log(props)
     return (
         <main className="grid-container">
             <HelpButton />

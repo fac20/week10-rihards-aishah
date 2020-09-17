@@ -78,11 +78,24 @@ const Game = (props) => {
             <HelpButton />
             <div className="panel"><Timer /></div>
             <div className="sand">
+                { props.player1.playerOne.location === "sand" ?  <Avatar onClick="">{props.player1.playerOne}</Avatar> : null }
+                { props.player2.playerTwo.location === "sand" ? <Avatar onClick="">{props.player2.playerTwo}</Avatar> : null }
+                { props.player3.playerThree.location === "sand" ? <Avatar onClick="">{props.player3.playerThree}</Avatar> : null}
+                { props.player4.playerFour.location === "sand" ? <Avatar onClick="">{props.player4.playerFour}</Avatar> : null}
             </div>
             
             <div className="bridge">
+                { props.player1.playerOne.location === "bridge" ?  <Avatar onClick="">{props.player1.playerOne}</Avatar> : null }
+                { props.player2.playerTwo.location === "bridge" ? <Avatar onClick="">{props.player2.playerTwo}</Avatar> : null }
+                { props.player3.playerThree.location === "bridge" ? <Avatar onClick="">{props.player3.playerThree}</Avatar> : null}
+                { props.player4.playerFour.location === "bridge" ? <Avatar onClick="">{props.player4.playerFour}</Avatar> : null}
             </div>
+
             <div className="grass">
+                { props.player1.playerOne.location === "grass" ?  <Avatar onClick="">{props.player1.playerOne}</Avatar> : null }
+                { props.player2.playerTwo.location === "grass" ? <Avatar onClick="">{props.player2.playerTwo}</Avatar> : null }
+                { props.player3.playerThree.location === "grass" ? <Avatar onClick="">{props.player3.playerThree}</Avatar> : null}
+                { props.player4.playerFour.location === "grass" ? <Avatar onClick="">{props.player4.playerFour}</Avatar> : null}
             </div>
         
         </main>

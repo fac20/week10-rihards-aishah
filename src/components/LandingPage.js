@@ -1,6 +1,5 @@
 import React from "react";
 import torch from './../torch.svg';
-import {playersArray} from "./Avatar.js"
 import {HelpButton} from "./help.js"
 import Game from "./GameBuild";
 
@@ -58,7 +57,7 @@ const [playerThree, setPlayerThree] = React.useState({username: "",
 }
 
 export const LandingPage = (props) => {
-    console.log(props)
+    // console.log(props)
     return (
         <div>
             <HelpButton />
@@ -79,7 +78,7 @@ export const LandingPage = (props) => {
 
 export const StartForm = (props) => {
 
-    console.log(props)
+    // console.log(props)
     return (
         <form>
             <fieldset>

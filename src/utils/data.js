@@ -1,4 +1,4 @@
-export const getAvatar = (username) => {
+export const getData = (username) => {
     const url = "https://api.github.com/users/"+ username;
 
     return fetch(url)

@@ -11,4 +11,3 @@ export const getAvatar = (username) => {
             })
             .catch(err => { throw new Error(`GitHub profile not fetched: ${err}`)})
 }
-

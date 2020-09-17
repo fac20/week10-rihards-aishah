@@ -20,6 +20,10 @@ export const LandingPage = () => {
 }
 
 export const StartForm = () => {
+
+
+
+
     return (
         <form>
             <fieldset>
@@ -28,7 +32,7 @@ export const StartForm = () => {
                 <input type="text" id="player2" placeholder="Player 2" />
                 <input type="text" id="player3" placeholder="Player 3" />
                 <input type="text" id="player4" placeholder="Player 4" />
-                <button type="Submit">Start Game!</button>
+                <button type="Submit" onClick={avatar}>Start Game!</button>
             </fieldset>
         </form>
     )

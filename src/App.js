@@ -1,19 +1,19 @@
 import React from 'react';
 import './App.css';
 import { LandingPage } from './components/LandingPage';
+import {} from './components/GameBuild';
 
 function App() {
+  const savedGame = window.localStorage.getItem("player_token");
+
   return (
     <div className="App">
-      <header className="App-header">
-        
-        <LandingPage />
-        
-      </header>
+        {!savedGame ? <LandingPage /> : null}
     </div>
   );
 }
 
-// return ({submitted ? <landingpage />:<game />})
+// return ({checkLocalStorage ? <landingpage />:<game />})
+
 
 export default App;

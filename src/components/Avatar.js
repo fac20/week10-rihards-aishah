@@ -26,33 +26,54 @@ for (let i=0; i<4; i++){
     playersArray.push(object)
 }
 
+
+
+
+
 //takes an input of an array of player objects
-const getPlayerObject = (array) => {
-    array.forEach(player => {
-        getData(player.username).then(data => {
-            player.name = data.name;
-            player.image = data.avatar_url
-        })
-    })
-    
-    return array;
+// const getPlayerObject = () => {
+//         getData(player.username).then(data => {
+//             player.name = data.name;
+//             player.image = data.avatar_url
+//             console.log(player)
+//         })
+//     })
+//     console.log(array);
+//     return array;
+// }
+
+
+const Avatar = (props) => {
+    // const [avatar, setAvatar] = React.useState(null);
+    // const [playerName, setPlayerName] = React.useState(null);
+    const [userData, setUserData] = React.useState(null)
+
+    React.useEffect( ()=> {
+        getData(props.children.username).then(data => setUserData(data));
+    }, [])
+    if (!userData) return <img src="./../loading.png" />
+
+    const { avatar_url, name } = userData;
+    return ( //add event listener to figure to move stuff
+        <figure>
+           <img src={avatar_url} alt="{name}" />
+            <figcaption>{name} | {props.children.speed}</figcaption> 
+        </figure>
+    )
+  
 }
 
-// const Avatar = (props) => {
-//     // const [avatar, setAvatar] = React.useState(null);
-//     // const [playerName, setPlayerName] = React.useState(null);
-//     const [userData, setUserData] = React.useState(null)
 
-//     React.useEffect( ()=> {
-//         getData(props.children).then(data => setUserData(data));
-//     }, [])
-//     if (!userData) return <img imgSrc="./../loading.png" />
 
-//     const { avatar_url, name } = userData;
-//     //   <img imgSrc={avatar_url} className="avatarimage" alt={name}/>
-  
-// }
-// //avatar returns player object? - wouldnt we want to save that?
+const Player = (info) => {
+    return ( //add event listener to figure to move stuff
+        <figure>
+           <img src={info.image} alt="{info.name}" />
+            <figcaption>{info.name} | {info.speed}</figcaption> 
+        </figure>
+    )
+    }
+//avatar returns player object? - wouldnt we want to save that?
 
 
 // playerObject.map {
@@ -65,4 +86,4 @@ const getPlayerObject = (array) => {
 //choosing which players to move on/off the bridge
 
 
-export {playersArray, getPlayerObject}
+export {playersArray}

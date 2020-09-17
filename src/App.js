@@ -1,19 +1,16 @@
 import React from 'react';
 import './App.css';
-import { LandingPage } from './components/LandingPage';
-import {} from './components/GameBuild';
+import { LandingPage, Box } from './components/LandingPage';
+import  Game from './components/GameBuild';
 
 function App() {
   const savedGame = window.localStorage.getItem("player_token");
 
   return (
     <div className="App">
-        {!savedGame ? <LandingPage /> : null}
+        <Box />
     </div>
   );
 }
-
-// return ({checkLocalStorage ? <landingpage />:<game />})
-
 
 export default App;

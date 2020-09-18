@@ -2,6 +2,7 @@ import React from "react";
 
 const Instructions = () => {
     return (
+        <div className="inst-parent">
         <div id="instructions">
         <h1>Instructions:</h1>
         <p>The aim of the game - to get everyone across the river
@@ -20,7 +21,7 @@ const Instructions = () => {
             When you have decided on who will cross on that time, click on the button "Cross". 
             The timer will update to reflect how much time you have left.
             To start again, press <strong>"Reset"</strong></p>
-
+            </div>
         </div>
     );
 }

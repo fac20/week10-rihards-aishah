@@ -2,6 +2,7 @@
 import React, { Children } from "react";
 import {HelpButton} from "./help.js";
 import {getData} from "../utils/data.js";
+import { render } from "react-dom";
 
 // const players = JSON.parse(window.localStorage.getItem("player_token"));
 
@@ -25,7 +26,7 @@ const Timer = (props) => {
         </div>
     )
 }
-
+//need to change this
 const movePlayer = (playerObj) => {
     switch (playerObj.location) {
         case "sand":
@@ -42,6 +43,7 @@ const movePlayer = (playerObj) => {
             break;
         //no default
     }
+    return playerObj;
 }
 
 const Player = (info) => {
@@ -71,49 +73,53 @@ const Avatar = (props) => {
   
 }
 
-const Game = () => {
-    const [playerOne, setPlayerOne] = React.useState({username: "",
-    name: "",
-    image: "",
-    torch: false,
-    location: "sand",
-    speed: 1})
+const Game = (props) => {
+    console.log(props)
+        const [player1, setPlayer1] = React.useState(props.player1.playerOne)
+        const [player2, setPlayer2] = React.useState(props.player2.playerTwo)
+        const [player3, setPlayer3] = React.useState(props.player3.playerThree)
+        const [player4, setPlayer4] = React.useState(props.player4.playerFour)
 
-    const [playerTwo, setPlayerTwo] = React.useState({username: "",
-    name: "",
-    image: "",
-    torch: false,
-    location: "sand",
-    speed: 2})
+    const updateplayer1 = (player) => {
+        setPlayer1(movePlayer(player));
+        console.log(player.username, player.location);
+    }
 
-    const [playerThree, setPlayerThree] = React.useState({username: "",
-    name: "",
-    image: "",
-    torch: false,
-    location: "sand",
-    speed: 5})
+        React.useEffect( ()=>{
 
-    const [playerFour, setPlayerFour] = React.useState({username: "",
-    name: "",
-    image: "",
-    torch: false,
-    location: "sand",
-    speed: 8})
+            setPlayer1(movePlayer(player1));
+            
+            
+        }, [player1]);
+    
 
+    
     return (
         <main className="grid-container">
+            <div className="sand">
+                { player1.location === "sand" ?  <div className="player" onClick={()=>updateplayer1(player1)}><Avatar>{props.player1.playerOne}</Avatar></div> : null }
+                { player2.location === "sand" ?  <div className="player"><Avatar onClick="">{props.player2.playerTwo}</Avatar></div> : null }
+            </div>
             <HelpButton />
             <div className="panel"><Timer /></div>
-            <div className="sand">
-            </div>
+
             
             <div className="bridge">
+                { player1.location === "bridge" ?  <div className="player" onClick={()=>updateplayer1(player1)}><Avatar>{props.player1.playerOne}</Avatar></div> : null }
+                { player2.location === "bridge" ? <div className="player"><Avatar onClick="">{props.player2.playerTwo}</Avatar></div> : null }
+                { player3.location === "bridge" ? <Avatar onClick="">{props.player3.playerThree}</Avatar> : null}
+                { player4.location === "bridge" ? <Avatar onClick="">{props.player4.playerFour}</Avatar> : null}
             </div>
+
             <div className="grass">
+                { player1.location === "grass" ?  <Avatar onClick="">{props.player1.playerOne}</Avatar> : null }
+                { player2.location === "grass" ? <Avatar onClick="">{props.player2.playerTwo}</Avatar> : null }
+                { player3.location === "grass" ? <Avatar onClick="">{props.player3.playerThree}</Avatar> : null}
+                { player4.location === "grass" ? <Avatar onClick="">{props.player4.playerFour}</Avatar> : null}
             </div>
         
         </main>
         )
-}
+}          
 
 export default Game;

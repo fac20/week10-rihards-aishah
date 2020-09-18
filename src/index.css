@@ -50,7 +50,7 @@ background-color: brown;}
 .grass { grid-area: grass; 
 background-color: green;}
 
-figure img {
+.player figure img {
   border-color: #666;
   border-image: none;
   border-radius: 50% 50% 50% 50%;

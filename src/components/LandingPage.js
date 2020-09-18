@@ -1,6 +1,5 @@
 import React from "react";
 import torch from './../torch.svg';
-import {playersArray} from "./Avatar.js"
 import {HelpButton} from "./help.js"
 import Game from "./GameBuild";
 
@@ -9,46 +8,14 @@ export const Box = (props) => {
 
     const createAvatars = (event) => {
         event.preventDefault();
-        // return gameCreated = true; 
         setPage("game");
+        //if not given value for 2/3/4, set username to default values
+        if (!playerTwo.username) setPlayerTwo(updatePlayerObject(playerTwo, "oliverjam", "username"))
+        if (!playerThree.username) setPlayerThree(updatePlayerObject(playerThree, "jackherizsmith", "username"))
+        if (!playerFour.username) setPlayerFour(updatePlayerObject(playerFour, "Albadylic", "username"))
     }
 
-    return (
-        <main>
-         {page !== "game" ? <LandingPage>{createAvatars}</LandingPage> : <Game />}
-        </main>
-    )
-}
-
-// setPlayerTwo(playerTwo => updateObject(playerTwo, event)) 
-// onChange={({ target }) => 
-
-export const LandingPage = (props) => {
-    return (
-        <div>
-            <HelpButton />
-            <img src={torch} className="App-logo" alt="logo" />
-            <h1>Welcome to our FAC Bridge and Torch Problem</h1>
-            <h2>How to Start: </h2>
-            <ol>
-            <li>Type in your GitHub username below</li>
-            <li>Optional - insert usernames of 3 other people</li>
-            <li>Click "Start Game"</li>
-            <li>For instructions on how to play, click on the ?</li>
-            </ol>
-            <StartForm>{props.children}</StartForm>
-        </div>
-        
-    )
-}
-
-export const StartForm = (props) => {
-    const [player1Name, setName1] = React.useState("");
-    const [player2Name, setName2] = React.useState("");
-    const [player3Name, setName3] = React.useState("");
-    const [player4Name, setName4] = React.useState("");
-
-const [playerOne, setPlayerOne] = React.useState({username: "",
+    const [playerOne, setPlayerOne] = React.useState({username: "",
 name: "",
 image: "",
 torch: false,
@@ -62,38 +29,67 @@ torch: false,
 location: "sand",
 speed: 2})
 
-    React.useEffect( ()=> {
-        console.log(playerOne)
-        console.log(playerTwo)
-        playersArray[1].username=player2Name || "oliverjam";
-        playersArray[2].username=player3Name || "jackherizsmith";
-        playersArray[3].username=player4Name || "Albadylic";
-    }, [playerOne, playerTwo, player3Name, player4Name])
+const [playerThree, setPlayerThree] = React.useState({username: "",
+    name: "",
+    image: "",
+    torch: false,
+    location: "sand",
+    speed: 5})
 
-    
-    // const {}
+    const [playerFour, setPlayerFour] = React.useState({username: "",
+    name: "",
+    image: "",
+    torch: false,
+    location: "sand",
+    speed: 8})
 
+    const updatePlayerObject = (playerObj, newValue, keyThing)=> {
+        let update = Object.assign({}, playerObj)
+        update[keyThing] = newValue;
+        return update;
+}
+
+    return (
+        <main>
+         {page !== "game" ? <LandingPage player1={{playerOne, setPlayerOne}} player2={{playerTwo, setPlayerTwo}} player3={{playerThree, setPlayerThree}} player4={{playerFour, setPlayerFour}} updatePlayerObject={updatePlayerObject}>{createAvatars}</LandingPage> : <Game player1={{playerOne, setPlayerOne}} player2={{playerTwo, setPlayerTwo}} player3={{playerThree, setPlayerThree}} player4={{playerFour, setPlayerFour}} updatePlayerObject={updatePlayerObject}  />}
+        </main>
+    )
+}
+
+export const LandingPage = (props) => {
+    // console.log(props)
+    return (
+        <div>
+            <HelpButton />
+            <img src={torch} className="App-logo" alt="logo" />
+            <h1>Welcome to our FAC Bridge and Torch Problem</h1>
+            <h2>How to Start: </h2>
+            <ol>
+            <li>Type in your GitHub username below</li>
+            <li>Optional - insert usernames of 3 other people</li>
+            <li>Click "Start Game"</li>
+            <li>For instructions on how to play, click on the ?</li>
+            </ol>
+            <StartForm player1={props.player1} player2={props.player2} player3={props.player3} player4={props.player4} updatePlayerObject={props.updatePlayerObject}>{props.children}</StartForm>
+        </div>
+        
+    )
+}
+
+export const StartForm = (props) => {
+
+    // console.log(props)
     return (
         <form>
             <fieldset>
                 <legend>PLAYERS</legend>
-                <input type="text" onChange={(event)=> setPlayerOne(updatePlayerObject(playerOne,event))}  id="player1" placeholder="Player 1*" required />
-                <input type="text" onChange={(event)=> setPlayerTwo(updatePlayerObject(playerTwo, event))} id="player2" placeholder="Player 2" />
-                <input type="text" onChange={(event)=> setName3(event.target.value)} id="player3" placeholder="Player 3" />
-                <input type="text" onChange={(event)=> setName4(event.target.value)} id="player4" placeholder="Player 4" />
+                <input type="text" onChange={(event)=> props.player1.setPlayerOne(props.updatePlayerObject(props.player1.playerOne, event.target.value, "username"))}  id="player1" placeholder="Player 1*" required />
+                <input type="text" value={props.player2.playerTwo.username} onChange={(event)=> props.player2.setPlayerTwo(props.updatePlayerObject(props.player2.playerTwo, event.target.value, "username"))} id="player2" placeholder="Player 2" />
+                <input type="text" value={props.player3.playerThree.username} onChange={(event)=> props.player3.setPlayerThree(props.updatePlayerObject(props.player3.playerThree, event.target.value, "username"))} id="player3" placeholder="Player 3" />
+                <input type="text" value={props.player4.playerFour.username} onChange={(event)=> props.player4.setPlayerFour(props.updatePlayerObject(props.player4.playerFour, event.target.value, "username"))} id="player4" placeholder="Player 4" />
                 <button type="Submit" onClick={props.children}>Start Game!</button>
             </fieldset>
         </form>
     )
 }
 
-const updatePlayerObject = (playerObj, event)=> {
-        let update = Object.assign({}, playerObj)
-        update.username = event.target.value;
-        return update;
-}
-
-// onChange={(event)=> setPlayerOne(playerOne => {
-//     let update = Object.assign({}, playerOne)
-//     update.username = event.target.value;
-//     return update;})}

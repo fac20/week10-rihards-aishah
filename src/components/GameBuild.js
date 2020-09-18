@@ -2,6 +2,7 @@
 import React, { Children } from "react";
 import {HelpButton} from "./help.js";
 import {getData} from "../utils/data.js";
+import { render } from "react-dom";
 
 // const players = JSON.parse(window.localStorage.getItem("player_token"));
 
@@ -42,6 +43,7 @@ const movePlayer = (playerObj) => {
             break;
         //no default
     }
+    return playerObj;
 }
 
 const Player = (info) => {
@@ -73,33 +75,51 @@ const Avatar = (props) => {
 
 const Game = (props) => {
     console.log(props)
+        const [player1, setPlayer1] = React.useState(props.player1.playerOne)
+        const [player2, setPlayer2] = React.useState(props.player2.playerTwo)
+        const [player3, setPlayer3] = React.useState(props.player3.playerThree)
+        const [player4, setPlayer4] = React.useState(props.player4.playerFour)
+
+    const updateplayer1 = (player) => {
+        setPlayer1(movePlayer(player));
+        console.log(player.username, player.location);
+    }
+
+        React.useEffect( ()=>{
+
+            setPlayer1(movePlayer(player1));
+            
+            
+        }, [player1]);
+    
+
+    
     return (
         <main className="grid-container">
+            <div className="sand">
+                { player1.location === "sand" ?  <div className="player" onClick={()=>updateplayer1(player1)}><Avatar>{props.player1.playerOne}</Avatar></div> : null }
+                { player2.location === "sand" ?  <div className="player"><Avatar onClick="">{props.player2.playerTwo}</Avatar></div> : null }
+            </div>
             <HelpButton />
             <div className="panel"><Timer /></div>
-            <div className="sand">
-                { props.player1.playerOne.location === "sand" ?  <Avatar onClick="">{props.player1.playerOne}</Avatar> : null }
-                { props.player2.playerTwo.location === "sand" ? <Avatar onClick="">{props.player2.playerTwo}</Avatar> : null }
-                { props.player3.playerThree.location === "sand" ? <Avatar onClick="">{props.player3.playerThree}</Avatar> : null}
-                { props.player4.playerFour.location === "sand" ? <Avatar onClick="">{props.player4.playerFour}</Avatar> : null}
-            </div>
+
             
             <div className="bridge">
-                { props.player1.playerOne.location === "bridge" ?  <Avatar onClick="">{props.player1.playerOne}</Avatar> : null }
-                { props.player2.playerTwo.location === "bridge" ? <Avatar onClick="">{props.player2.playerTwo}</Avatar> : null }
-                { props.player3.playerThree.location === "bridge" ? <Avatar onClick="">{props.player3.playerThree}</Avatar> : null}
-                { props.player4.playerFour.location === "bridge" ? <Avatar onClick="">{props.player4.playerFour}</Avatar> : null}
+                { player1.location === "bridge" ?  <div className="player" onClick={()=>updateplayer1(player1)}><Avatar>{props.player1.playerOne}</Avatar></div> : null }
+                { player2.location === "bridge" ? <div className="player"><Avatar onClick="">{props.player2.playerTwo}</Avatar></div> : null }
+                { player3.location === "bridge" ? <Avatar onClick="">{props.player3.playerThree}</Avatar> : null}
+                { player4.location === "bridge" ? <Avatar onClick="">{props.player4.playerFour}</Avatar> : null}
             </div>
 
             <div className="grass">
-                { props.player1.playerOne.location === "grass" ?  <Avatar onClick="">{props.player1.playerOne}</Avatar> : null }
-                { props.player2.playerTwo.location === "grass" ? <Avatar onClick="">{props.player2.playerTwo}</Avatar> : null }
-                { props.player3.playerThree.location === "grass" ? <Avatar onClick="">{props.player3.playerThree}</Avatar> : null}
-                { props.player4.playerFour.location === "grass" ? <Avatar onClick="">{props.player4.playerFour}</Avatar> : null}
+                { player1.location === "grass" ?  <Avatar onClick="">{props.player1.playerOne}</Avatar> : null }
+                { player2.location === "grass" ? <Avatar onClick="">{props.player2.playerTwo}</Avatar> : null }
+                { player3.location === "grass" ? <Avatar onClick="">{props.player3.playerThree}</Avatar> : null}
+                { player4.location === "grass" ? <Avatar onClick="">{props.player4.playerFour}</Avatar> : null}
             </div>
         
         </main>
         )
-}
+}          
 
 export default Game;
